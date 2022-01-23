@@ -1,5 +1,6 @@
 # Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 
 from students.forms import StudentCreateForm, StudentUpdateForm
@@ -85,7 +86,7 @@ def create_student(request):
 
 @csrf_exempt
 def update_student(request, id):
-    student = Student.objects.get(id=id)
+    student = get_object_or_404(Student, id=id)
 
     if request.method == 'POST':
         form = StudentUpdateForm(request.POST, instance=student)
