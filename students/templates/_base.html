@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>STUDENTS</title>
+
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+            border: none;
+        }
+
+        table td, table th {
+            border: 1px dashed gray;
+            padding: 7px;
+        }
+
+    </style>
+</head>
+<body>
+    <p>
+        {% include '_header_menu.html' %}
+    </p>
+
+    {% block main %}
+    {% endblock %}
+</body>
+</html>
