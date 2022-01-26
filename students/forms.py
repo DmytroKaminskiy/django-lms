@@ -1,5 +1,3 @@
-import re
-
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 
@@ -10,13 +8,6 @@ class StudentBaseForm(ModelForm):
     class Meta:
         model = Student
         fields = '__all__'
-
-    def clean_phone_number(self):
-        phone_number = self.cleaned_data['phone_number']
-        if not re.match(r'(\+\d\d?)?\(\d{3}\)(\d-?){7}$', phone_number):
-            raise ValidationError("Phone number should be in "
-                                  "format +1(121)232-32-32")
-        return phone_number
 
     def clean(self):
         result = super().clean()
@@ -29,6 +20,23 @@ class StudentBaseForm(ModelForm):
                                   "than gradate date")
 
         return result
+
+    def clean_phone_number(self):
+        phone_number = self.cleaned_data['phone_number']
+
+        has_phone_number_qs = Student.objects.filter(
+            phone_number=phone_number
+        )
+
+        if self.instance:
+            has_phone_number_qs = has_phone_number_qs.exclude(
+                id=self.instance.id
+            )
+
+        if has_phone_number_qs.exists():
+            raise ValidationError("Phone number is not unique")
+
+        return phone_number
 
 
 class StudentCreateForm(StudentBaseForm):

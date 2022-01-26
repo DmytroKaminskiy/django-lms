@@ -55,5 +55,5 @@ def render_students_list_html(list_of_object, extra_data="",
     if not list_of_object:
         message += '<br>' + html.escape(no_data_message)
 
-    response = HttpResponse(message)
+    response = HttpResponse('<body>%s</body>' % message)
     return response
