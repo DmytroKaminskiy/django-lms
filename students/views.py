@@ -1,5 +1,5 @@
 # Create your views here.
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
@@ -53,7 +53,7 @@ def create_student(request):
         form = StudentCreateForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('list_students'))
+            return HttpResponseRedirect(reverse('students:list_students'))
     else:
         form = StudentCreateForm()
 
@@ -70,10 +70,37 @@ def update_student(request, id):
         form = StudentUpdateForm(request.POST, instance=student)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('list_students'))
+            return HttpResponseRedirect(reverse('students:list_students'))
     else:
         form = StudentUpdateForm(instance=student)
 
     return render(request, 'edit_student.html', {
         'form': form
     })
+
+
+@csrf_exempt
+def delete_student(request, id):
+    student = get_object_or_404(Student, id=id)
+
+    if request.method == 'POST':
+        student.delete()
+        return HttpResponseRedirect(reverse('students:list_students'))
+
+    return render(
+        request,
+        'delete_student.html',
+        {
+            'student': student
+        }
+    )
+
+
+# Not used
+def delete_student_no_confirmation(request, id):
+    try:
+        student = Student.objects.get(id=id)
+        student.delete()
+    except Student.DoesNotExist:
+        pass
+    return HttpResponseRedirect(reverse('students:list_students'))

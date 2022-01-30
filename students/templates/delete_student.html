@@ -1,0 +1,11 @@
+{% extends '_base.html' %}
+
+{% block main %}
+    <form method="post">
+        <p>Do you want to delete student {{ student.name }}?</p>
+        <p>
+            <button class="btn btn-danger" type="submit">Delete</button>
+            <a class="btn btn-info" href="{% url 'students:list_students' %}">Cancel</a>
+        </p>
+    </form>
+{% endblock %}

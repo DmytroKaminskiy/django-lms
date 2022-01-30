@@ -9,22 +9,29 @@
         </p>
     </form>
     <br>
-    <a href="{% url 'create_students' %}">Add new student</a><br>
+    <a href="{% url 'students:create_students' %}">Add new student</a><br>
 
-    <table>
-    <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th></th>
-    </tr>
-
-    {% for student in filter.qs|slice:":20" %}
+    <p id="main-paragraph">Text 1</p>
+    <p> <strong class="text-red">Text 2</strong></p>
+    <table class="table table-striped">
         <tr>
-            <td>{{ student.first_name|capfirst }}</td>
-            <td>{{ student.last_name|title }}</td>
-            <td><a href="{% url 'update_students' id=student.id %}">Edit</a></td>
+            <th><strong>First Name</strong></th>
+            <th class="text-red border-blue">Last Name</th>
+            <th>INN</th>
+            <th></th>
         </tr>
-    {% endfor %}
+
+        {% for student in filter.qs|slice:":20" %}
+            <tr>
+                <td>{{ student.first_name|capfirst }}</td>
+                <td>{{ student.last_name|title }}</td>
+                <td>{{ student.inn }}</td>
+                <td>
+                    <a href="{% url 'students:update_students' id=student.id %}">✎</a>
+                    <a href="{% url 'students:delete_students' id=student.id %}">🗑</a>
+                </td>
+            </tr>
+        {% endfor %}
     </table>
 
 {% endblock %}
