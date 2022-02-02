@@ -41,13 +41,11 @@ def get_students(request):
 
     students_filter = StudentFilter(data=request.GET, queryset=qs)
 
-    return render(request, 'list_students.html', {
-        'args': request.GET,
+    return render(request, 'students/list_students.html', {
         'filter': students_filter
     })
 
 
-@csrf_exempt
 def create_student(request):
     if request.method == 'POST':
         form = StudentCreateForm(request.POST)
@@ -57,12 +55,11 @@ def create_student(request):
     else:
         form = StudentCreateForm()
 
-    return render(request, 'create_student.html', {
+    return render(request, 'students/create_student.html', {
         'form': form
     })
 
 
-@csrf_exempt
 def update_student(request, id):
     student = get_object_or_404(Student, id=id)
 
@@ -74,12 +71,11 @@ def update_student(request, id):
     else:
         form = StudentUpdateForm(instance=student)
 
-    return render(request, 'edit_student.html', {
+    return render(request, 'students/edit_student.html', {
         'form': form
     })
 
 
-@csrf_exempt
 def delete_student(request, id):
     student = get_object_or_404(Student, id=id)
 
@@ -89,7 +85,7 @@ def delete_student(request, id):
 
     return render(
         request,
-        'delete_student.html',
+        'students/delete_student.html',
         {
             'student': student
         }

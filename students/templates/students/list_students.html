@@ -1,9 +1,10 @@
 {% extends '_base.html' %}
+{% load crispy_forms_tags %}
 
 {% block main %}
     <form>
         <p>Search students</p>
-        {{ filter.form.as_p }}
+        {{ filter.form|crispy }}
         <p>
             <button type="submit">Search</button>
         </p>
@@ -11,11 +12,9 @@
     <br>
     <a href="{% url 'students:create_students' %}">Add new student</a><br>
 
-    <p id="main-paragraph">Text 1</p>
-    <p> <strong class="text-red">Text 2</strong></p>
     <table class="table table-striped">
         <tr>
-            <th><strong>First Name</strong></th>
+            <th>First Name</th>
             <th class="text-red border-blue">Last Name</th>
             <th>INN</th>
             <th></th>

@@ -40,9 +40,11 @@ INSTALLED_APPS = [
 
     'django_extensions',
     "debug_toolbar",
+    "crispy_forms",
 
     'core_lms',
     'students',
+    'groups',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +140,5 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

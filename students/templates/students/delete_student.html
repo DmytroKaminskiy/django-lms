@@ -2,6 +2,7 @@
 
 {% block main %}
     <form method="post">
+        {% csrf_token %}
         <p>Do you want to delete student {{ student.name }}?</p>
         <p>
             <button class="btn btn-danger" type="submit">Delete</button>
