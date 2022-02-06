@@ -12,25 +12,6 @@
     <br>
     <a href="{% url 'students:create_students' %}">Add new student</a><br>
 
-    <table class="table table-striped">
-        <tr>
-            <th>First Name</th>
-            <th class="text-red border-blue">Last Name</th>
-            <th>INN</th>
-            <th></th>
-        </tr>
-
-        {% for student in filter.qs|slice:":20" %}
-            <tr>
-                <td>{{ student.first_name|capfirst }}</td>
-                <td>{{ student.last_name|title }}</td>
-                <td>{{ student.inn }}</td>
-                <td>
-                    <a href="{% url 'students:update_students' id=student.id %}">✎</a>
-                    <a href="{% url 'students:delete_students' id=student.id %}">🗑</a>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+    {% include 'students/_students_list.html' with students=filter.qs|slice:":20" %}
 
 {% endblock %}

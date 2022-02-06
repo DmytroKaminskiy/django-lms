@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'core_lms',
     'students',
     'groups',
+    'lms_events',
 ]
 
 MIDDLEWARE = [

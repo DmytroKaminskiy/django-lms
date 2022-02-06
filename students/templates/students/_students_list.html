@@ -1,0 +1,36 @@
+    <table class="table table-striped">
+        <tr>
+            <th>First Name</th>
+            <th class="text-red border-blue">Last Name</th>
+            <th>Group</th>
+            <th>Group Headman</th>
+            <th>INN</th>
+            <th></th>
+        </tr>
+
+        {% for student in students %}
+            <tr>
+                <td>{{ student.first_name|capfirst }}</td>
+                <td>{{ student.last_name|title }}</td>
+                <td>
+                    {% if student.group_id %}
+                        <a href="{% url 'groups:group' id=student.group_id %}">
+                            {{ student.group.name }}
+                        </a>
+                    {% else %}
+                        <i>Empty</i>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if student.group_id and student.group.headman_id %}
+                        {{ student.group.headman.name }}
+                    {% endif %}
+                </td>
+                <td>{{ student.inn }}</td>
+                <td>
+                    <a href="{% url 'students:update_students' id=student.id %}">✎</a>
+                    <a href="{% url 'students:delete_students' id=student.id %}">🗑</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>

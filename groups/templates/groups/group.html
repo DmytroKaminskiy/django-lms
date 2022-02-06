@@ -1,0 +1,26 @@
+{% extends '_base.html' %}
+
+{% block main %}
+    <h2>Group {{ group.name }}</h2>
+    <table class="table">
+        <tr>
+            <th>Course</th>
+            <td>{{ group.course }}</td>
+        </tr>
+        <tr>
+            <th>Start Date</th>
+            <td>{{ group.start_date }}</td>
+        </tr>
+        <tr>
+            <th>Headman</th>
+            <td>{{ group.headman.name }}</td>
+        </tr>
+    </table>
+
+    <h3>Students</h3>
+
+    {% with students=group.students.all %}
+        {% include 'students/_students_list.html' %}
+    {% endwith %}
+
+{% endblock %}

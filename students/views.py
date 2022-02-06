@@ -2,7 +2,6 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
-from django.views.decorators.csrf import csrf_exempt
 
 from students.forms import StudentCreateForm, StudentUpdateForm, StudentFilter
 from students.models import Student
@@ -37,7 +36,7 @@ def get_students(request):
     # except ValueError as e:
     #     return HttpResponse(f"Error wrong input data. {str(e)}", status=400)
 
-    qs = qs.order_by('-id')
+    qs = qs.select_related('group__headman').order_by('-id')
 
     students_filter = StudentFilter(data=request.GET, queryset=qs)
 
