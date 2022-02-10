@@ -1,7 +1,7 @@
 {% extends '_base.html' %}
 
 {% block main %}
-    <h2>Group {{ group.name }}</h2>
+    <h2>Group {{ group.name }} | <a href="{% url 'groups:edit_group' id=group.id %}">[Edit]</a></h2>
     <table class="table">
         <tr>
             <th>Course</th>
