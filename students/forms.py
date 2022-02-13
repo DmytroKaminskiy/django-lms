@@ -8,7 +8,11 @@ from students.models import Student
 class StudentFilter(django_filters.FilterSet):
     class Meta:
         model = Student
-        fields = ['first_name', 'last_name', 'age']
+        fields = {
+            'first_name': ['iexact'],
+            'last_name': ['iexact'],
+            'age': ['exact'],
+        }
 
 
 class StudentBaseForm(ModelForm):

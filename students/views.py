@@ -2,22 +2,31 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
-from django.views.generic import UpdateView, DeleteView, CreateView
+from django.views.generic import UpdateView, DeleteView, CreateView, ListView
 
 from students.forms import StudentCreateForm, StudentUpdateForm, StudentFilter
 from students.models import Student
 
 
-def get_students(request):
-    qs = Student.objects.all()
+class StudentListView(ListView):
+    model = Student
+    template_name = 'students/list_students.html'
 
-    qs = qs.select_related('group__headman').order_by('-id')
+    def get_filter(self, queryset=None):
+        if not queryset:
+            queryset = self.get_queryset()
+        return StudentFilter(data=self.request.GET, queryset=queryset)
 
-    students_filter = StudentFilter(data=request.GET, queryset=qs)
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.select_related('group__headman').order_by('-id')
+        filter_ = self.get_filter(queryset)
+        return filter_.qs
 
-    return render(request, 'students/list_students.html', {
-        'filter': students_filter
-    })
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = self.get_filter()
+        return context
 
 
 class StudentCreateView(CreateView):

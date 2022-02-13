@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'students',
     'groups',
     'lms_events',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -143,3 +144,5 @@ INTERNAL_IPS = [
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+LOGIN_URL = 'accounts:login'
+LOGIN_REDIRECT_URL = 'index'
