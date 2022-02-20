@@ -3,10 +3,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 # Create your views here.
 from django.contrib.auth.views import LoginView
-from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy, reverse
+from django.views import View
+from django.views.generic import CreateView
 
-from accounts.forms import AccountRegisterForm, AccountProfileForm
+from accounts.forms import AccountRegisterForm, UserEditForm, ProfileEditForm
 
 
 class AccountRegister(CreateView):
@@ -30,21 +32,56 @@ class AccountLogin(LoginView):
         return result
 
 
-class AccountEdit(LoginRequiredMixin, UpdateView):
-    model = User
-    template_name = 'accounts/profile.html'
-    success_url = reverse_lazy('accounts:profile')
-    form_class = AccountProfileForm
+class AccountEdit(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        profile = request.user.profile
 
-    def get_object(self, queryset=None):
-        return self.request.user
+        user_form = UserEditForm(instance=user)
+        profile_form = ProfileEditForm(instance=profile)
 
-    def form_valid(self, form):
-        result = super().form_valid(form)
-
-        messages.success(
-            self.request,
-            f'Profile updated successfully'
+        return render(
+            request,
+            'accounts/profile.html',
+            context={
+                'user_form': user_form,
+                'profile_form': profile_form
+            }
         )
 
-        return result
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        profile = request.user.profile
+
+        user_form = UserEditForm(
+            instance=user,
+            data=request.POST
+        )
+        profile_form = ProfileEditForm(
+            instance=profile,
+            data=request.POST,
+            files=request.FILES
+        )
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+
+            messages.success(
+                request,
+                'Profile updated successfully'
+            )
+
+            return redirect(reverse('accounts:profile'))
+
+        return render(
+            request,
+            'accounts/profile.html',
+            context={
+                'user_form': user_form,
+                'profile_form': profile_form
+            }
+        )
+
+    def put(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)

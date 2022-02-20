@@ -12,6 +12,7 @@
     <br>
     <a href="{% url 'students:create_students' %}">Add new student</a><br>
 
-    {% include 'students/_students_list.html' with students=object_list|slice:":20" %}
+    {% include 'students/_students_list.html' with students=object_list %}
 
+    {% include '_pagination.html' %}
 {% endblock %}
