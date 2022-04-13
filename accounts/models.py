@@ -25,7 +25,7 @@ class Profile(models.Model):
         for user in User.objects.all():
             try:
                 user.profile
-            except:
+            except Exception:
                 profile = Profile()
                 profile.user = user
                 profile.save()
