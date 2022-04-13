@@ -160,3 +160,10 @@ if DEBUG:
 
     hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
     INTERNAL_IPS = [ip[:-1] + '1' for ip in ips] + ['127.0.0.1', '10.0.2.2']
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST_USER = 'testtestapp454545@gmail.com'
+
+
+CELERY_BROKER_URL = f'amqp://guest:guest@localhost:5672//'
