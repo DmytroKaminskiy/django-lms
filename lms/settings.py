@@ -13,6 +13,8 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from celery.schedules import crontab
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
@@ -167,3 +169,10 @@ EMAIL_HOST_USER = 'testtestapp454545@gmail.com'
 
 
 CELERY_BROKER_URL = f'amqp://guest:guest@localhost:5672//'
+CELERY_BEAT_SCHEDULE = {
+    'debug': {
+        'task': 'accounts.tasks.debug',
+        'schedule': crontab(minute='*/1'),
+        # 'schedule': crontab(minute='*/15'),
+    },
+}

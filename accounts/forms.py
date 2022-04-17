@@ -1,7 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.forms import ModelForm
-from django.core.mail import send_mail
-from django.conf import settings
 
 from accounts.models import Profile
 from accounts.tasks import send_registration_email

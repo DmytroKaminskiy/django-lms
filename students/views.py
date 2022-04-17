@@ -1,7 +1,9 @@
 # Create your views here.
 from django.http import HttpResponseRedirect
+from django.http.response import HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.views.generic import UpdateView, DeleteView, CreateView, ListView
+from django.views.generic.base import View
 
 from students.forms import StudentCreateForm, StudentUpdateForm, StudentFilter
 from students.models import Student
@@ -33,6 +35,19 @@ class StudentListView(ListView):
         # context['page_obj'] = page_obj
 
         return context
+
+
+class StudentsListAPIExample(View):
+    def get(self, request):
+        import json
+        queryset = Student.objects.all()
+        response_dict = {
+            'students': [
+                {'id': student.id, 'first_name': student.first_name, 'last_name': student.last_name}
+                for student in queryset
+            ]
+        }
+        return HttpResponse(json.dumps(response_dict), content_type='application/json')
 
 
 class StudentCreateView(CreateView):

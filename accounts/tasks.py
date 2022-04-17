@@ -23,3 +23,18 @@ def send_registration_email(email_to):
         [email_to],
         fail_silently=False,
     )
+
+
+@shared_task
+def parse_binance():
+    print('Start Parsing...')
+
+
+@shared_task
+def parse_kraken():
+    print('Start Parsing...')
+
+
+@shared_task
+def parse_nexo():
+    print('Start Parsing...')
