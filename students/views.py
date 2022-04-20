@@ -38,6 +38,17 @@ class StudentListView(ListView):
 
 
 class StudentsListAPIExample(View):
+    """
+    CRUD
+
+    /students/
+    C - create (POST)
+    R - read (GET)
+    U - update (PUT/PATCH)
+    D - delete (DELETE)
+
+    OPTIONS, HEAD
+    """
     def get(self, request):
         import json
         queryset = Student.objects.all()

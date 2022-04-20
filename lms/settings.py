@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django_extensions',
     "debug_toolbar",
     "crispy_forms",
+    'rest_framework',
+    'drf_yasg',
 
     'core_lms',
     'students',
