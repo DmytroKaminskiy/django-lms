@@ -26,7 +26,7 @@ urlpatterns = [
     path('account/', include('accounts.urls')),
     path('students/', include('students.urls')),
     path('groups/', include('groups.urls')),
-    path('api/', include('api.urls')),
+    path('api/v1/', include('api.v1.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
 ]
 

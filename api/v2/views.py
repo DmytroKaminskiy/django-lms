@@ -2,7 +2,7 @@
 from rest_framework.renderers import JSONRenderer
 
 from students.models import Student
-from api.serializers import StudentSerializer
+from api.v1.serializers import StudentSerializer
 from rest_framework import viewsets
 from rest_framework_xml.renderers import XMLRenderer
 
