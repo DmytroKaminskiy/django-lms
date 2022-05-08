@@ -1,0 +1,22 @@
+[
+  {
+    "model": "groups.group",
+    "pk": 1,
+    "fields": {
+      "name": "GroupsName1",
+      "course": "Course1",
+      "start_date": "2022-04-17",
+      "headman": null
+    }
+  },
+  {
+    "model": "groups.group",
+    "pk": 2,
+    "fields": {
+      "name": "GroupsName2",
+      "course": "Course2",
+      "start_date": "2022-04-17",
+      "headman": null
+    }
+  }
+]

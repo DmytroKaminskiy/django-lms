@@ -1,0 +1,197 @@
+[
+  {
+    "model": "students.student",
+    "pk": 1,
+    "fields": {
+      "first_name": "Bradley",
+      "last_name": "Gonzales",
+      "age": 20,
+      "email": "",
+      "phone_number": "",
+      "enroll_date": "2022-04-17",
+      "graduate_date": "2022-04-17",
+      "inn": null,
+      "group": 1
+    }
+  },
+  {
+    "model": "students.student",
+    "pk": 2,
+    "fields": {
+      "first_name": "Sean",
+      "last_name": "Bautista",
+      "age": 46,
+      "email": "",
+      "phone_number": "",
+      "enroll_date": "2022-04-17",
+      "graduate_date": "2022-04-17",
+      "inn": null,
+      "group": 2
+    }
+  },
+  {
+    "model": "students.student",
+    "pk": 3,
+    "fields": {
+      "first_name": "Michelle",
+      "last_name": "Castro",
+      "age": 44,
+      "email": "",
+      "phone_number": "",
+      "enroll_date": "2022-04-17",
+      "graduate_date": "2022-04-17",
+      "inn": null,
+      "group": 1
+    }
+  },
+  {
+    "model": "students.student",
+    "pk": 4,
+    "fields": {
+      "first_name": "Holly",
+      "last_name": "Benjamin",
+      "age": 36,
+      "email": "",
+      "phone_number": "",
+      "enroll_date": "2022-04-17",
+      "graduate_date": "2022-04-17",
+      "inn": null,
+      "group": null
+    }
+  },
+  {
+    "model": "students.student",
+    "pk": 5,
+    "fields": {
+      "first_name": "Ronnie",
+      "last_name": "Hanson",
+      "age": 20,
+      "email": "",
+      "phone_number": "",
+      "enroll_date": "2022-04-17",
+      "graduate_date": "2022-04-17",
+      "inn": null,
+      "group": 2
+    }
+  },
+  {
+    "model": "students.student",
+    "pk": 6,
+    "fields": {
+      "first_name": "Benjamin",
+      "last_name": "Rowe",
+      "age": 47,
+      "email": "",
+      "phone_number": "",
+      "enroll_date": "2022-04-17",
+      "graduate_date": "2022-04-17",
+      "inn": null,
+      "group": null
+    }
+  },
+  {
+    "model": "students.student",
+    "pk": 7,
+    "fields": {
+      "first_name": "Melissa",
+      "last_name": "Garza",
+      "age": 74,
+      "email": "",
+      "phone_number": "",
+      "enroll_date": "2022-04-17",
+      "graduate_date": "2022-04-17",
+      "inn": null,
+      "group": null
+    }
+  },
+  {
+    "model": "students.student",
+    "pk": 8,
+    "fields": {
+      "first_name": "Troy",
+      "last_name": "Ward",
+      "age": 63,
+      "email": "",
+      "phone_number": "",
+      "enroll_date": "2022-04-17",
+      "graduate_date": "2022-04-17",
+      "inn": null,
+      "group": null
+    }
+  },
+  {
+    "model": "students.student",
+    "pk": 9,
+    "fields": {
+      "first_name": "David",
+      "last_name": "Bell",
+      "age": 32,
+      "email": "",
+      "phone_number": "",
+      "enroll_date": "2022-04-17",
+      "graduate_date": "2022-04-17",
+      "inn": null,
+      "group": null
+    }
+  },
+  {
+    "model": "students.student",
+    "pk": 10,
+    "fields": {
+      "first_name": "Rick",
+      "last_name": "Thompson",
+      "age": 46,
+      "email": "",
+      "phone_number": "",
+      "enroll_date": "2022-04-17",
+      "graduate_date": "2022-04-17",
+      "inn": null,
+      "group": null
+    }
+  },
+  {
+    "model": "students.student",
+    "pk": 13,
+    "fields": {
+      "first_name": "Dmytro",
+      "last_name": "Kaminskyi",
+      "age": 20,
+      "email": "",
+      "phone_number": "",
+      "enroll_date": "2022-04-20",
+      "graduate_date": "2022-04-20",
+      "inn": null,
+      "group": null
+    }
+  },
+  {
+    "model": "students.student",
+    "pk": 14,
+    "fields": {
+      "first_name": "Dmytro",
+      "last_name": "Kaminskyi",
+      "age": 20,
+      "email": "",
+      "phone_number": "",
+      "enroll_date": "2022-04-20",
+      "graduate_date": "2022-04-20",
+      "inn": null,
+      "group": 2
+    }
+  },
+  {
+    "model": "students.student",
+    "pk": 15,
+    "fields": {
+      "first_name": "Dmytro",
+      "last_name": "Kaminskyi",
+      "age": 20,
+      "email": "feadawda@mail.com",
+      "phone_number": "+1(111)222-33-41",
+      "enroll_date": "2022-04-20",
+      "graduate_date": "2022-04-20",
+      "inn": 324,
+      "group": 1
+    }
+  }
+]
