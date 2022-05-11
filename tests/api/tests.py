@@ -45,9 +45,3 @@ def test_student_put_delete_success(client_api):
     response = client_api.delete(f'/api/v1/students/{student.id}/')
     assert response.status_code == 204, response.json()
     assert not response.content
-
-
-'''
-1. Тесты для приложения Teacher (+ API)
-2. Тесты для приложения Group (+ API)
-'''
