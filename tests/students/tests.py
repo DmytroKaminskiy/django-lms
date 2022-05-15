@@ -3,12 +3,12 @@ from datetime import date
 from groups.models import Group
 
 
-def test_student_form_get(client):
-    response = client.get('/students/create')
+def test_student_form_get(admin_client):
+    response = admin_client.get('/students/create')
     assert response.status_code == 200
 
-def test_student_form_post_empty(client):
-    response = client.post('/students/create')
+def test_student_form_post_empty(admin_client):
+    response = admin_client.post('/students/create')
     assert response.status_code == 200  # error
     assert response.context_data['form'].errors == {
         'first_name': ['This field is required.'],
@@ -23,7 +23,7 @@ def test_student_form_post_empty(client):
     }
 
 
-def test_student_form_post_valid(client, group):
+def test_student_form_post_valid(admin_client, group):
     payload = {
         'first_name': 'FirstName',
         'last_name': 'LastName',
@@ -35,12 +35,12 @@ def test_student_form_post_valid(client, group):
         'inn': '909090909',
         'group': group.id,
     }
-    response = client.post('/students/create', data=payload)
+    response = admin_client.post('/students/create', data=payload)
     assert response.status_code == 302  # success
     assert response.url == '/students/'
 
 
-def test_student_form_post_invalid_email(client, group):
+def test_student_form_post_invalid_email(admin_client, group):
     payload = {
         'first_name': 'FirstName',
         'last_name': 'LastName',
@@ -52,14 +52,14 @@ def test_student_form_post_invalid_email(client, group):
         'inn': '909090909',
         'group': group.id,
     }
-    response = client.post('/students/create', data=payload)
+    response = admin_client.post('/students/create', data=payload)
     assert response.status_code == 200
     assert response.context_data['form'].errors == {
         'email': ['Enter a valid email address.'],
     }
 
 
-def test_student_form_post_enroll_date_greater_graduate_date(client, group):
+def test_student_form_post_enroll_date_greater_graduate_date(admin_client, group):
     payload = {
         'first_name': 'FirstName',
         'last_name': 'LastName',
@@ -71,7 +71,7 @@ def test_student_form_post_enroll_date_greater_graduate_date(client, group):
         'inn': '909090909',
         'group': group.id,
     }
-    response = client.post('/students/create', data=payload)
+    response = admin_client.post('/students/create', data=payload)
     assert response.status_code == 200
     assert response.context_data['form'].errors == {
         '__all__': ['Enroll date cannot be less than gradate date'],

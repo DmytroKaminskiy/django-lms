@@ -1,4 +1,5 @@
 # Create your views here.
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.http.response import HttpResponse
 from django.urls import reverse, reverse_lazy
@@ -26,6 +27,10 @@ class StudentListView(ListView):
         return filter_.qs
 
     def get_context_data(self, **kwargs):
+
+        from threading import current_thread
+        print(f'Current Thread is: {current_thread()}')
+
         context = super().get_context_data(**kwargs)
         context['filter'] = self.get_filter()
 
@@ -61,7 +66,7 @@ class StudentsListAPIExample(View):
         return HttpResponse(json.dumps(response_dict), content_type='application/json')
 
 
-class StudentCreateView(CreateView):
+class StudentCreateView(LoginRequiredMixin, CreateView):
     model = Student
     success_url = reverse_lazy('students:list_students')
     form_class = StudentCreateForm
