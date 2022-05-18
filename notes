@@ -8,3 +8,18 @@ Projects
 /students/   }
 /teachers/     -> non_paid_users 2/min
 /groups/     }
+
+1. Cloud Provider (AWS - amazon, GCP - google, Azure - microsoft, DigitalOcean)
++ Time
++ Resource
++ Auto
+- Private
+- Expensive
+
+
+2. Private servers (Hetzner)
++ Cheaper than cloud providers
++ Private
+- Time
+- Resource
+- Manual

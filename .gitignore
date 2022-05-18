@@ -10,3 +10,4 @@ media
 .coverage
 .pytest_cache
 celerybeat-schedule
+lms/settings_local.py

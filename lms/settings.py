@@ -219,3 +219,8 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+
+try:
+    from lms.settings_local import *
+except ImportError:
+    print('Local Settings not found\n' * 3)
