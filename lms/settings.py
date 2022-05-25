@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from datetime import timedelta
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from celery.schedules import crontab
@@ -24,13 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-e4e9##rfypv9(jfd_=_-s4qq*ud$(r95gumi*oinfpzmkn3dmz'
 SECRET_KEY = os.environ['SECRET_KEY']
-print(SECRET_KEY)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-import os
-DEBUG = os.environ['DEBUG'] == 'True'
-
-print(f'DEBUG IS: {DEBUG}!')
+DEBUG = os.environ.get('DEBUG') == 'True'
+print(DEBUG)
 
 ALLOWED_HOSTS = ['*']
 
@@ -189,10 +187,15 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST_USER = 'testtestapp454545@gmail.com'
 
 
-CELERY_BROKER_URL = f'amqp://guest:guest@localhost:5672//'
+# CELERY_BROKER_URL = f'amqp://guest:guest@localhost:5672//'
+CELERY_BROKER_URL = f'amqp://{os.environ["RABBITMQ_DEFAULT_USER"]}:' \
+        f'{os.environ["RABBITMQ_DEFAULT_PASS"]}@' \
+        f'{os.environ["RABBITMQ_DEFAULT_HOST"]}:' \
+        f'{os.environ["RABBITMQ_DEFAULT_PORT"]}//'
+
 CELERY_BEAT_SCHEDULE = {
     'debug': {
-        'task': 'accounts.tasks.debug',
+        'task': 'accounts.tasks.debug_io',
         'schedule': crontab(minute='*/1'),
         # 'schedule': crontab(minute='*/15'),
     },

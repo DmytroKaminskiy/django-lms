@@ -1,9 +1,60 @@
 version: "3"
 
 services:
+  backend:
+    image: django-lms
+    build: .
+    container_name: backend
+    stdin_open: true
+    tty: true
+#    dns:
+#      - 8.8.8.8
+#      - 8.8.4.4
+    volumes:
+      - "./:/project/code"
+    depends_on:
+      - postgres
+      - broker
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+
+  celery:
+    image: django-lms
+    build: .
+    container_name: celery
+    command: celery -A lms worker --loglevel info --pidfile=/tmp/celery.pid
+    stdin_open: true
+    tty: true
+    volumes:
+      - "./:/project/code"
+    depends_on:
+      - postgres
+      - broker
+    env_file:
+      - .env
+
+  celerybeat:
+    image: django-lms
+    build: .
+    container_name: celerybeat
+    command: celery -A lms beat --loglevel info --schedule=/tmp/celerybeat-schedule --pidfile=/tmp/celerybeat.pid
+    stdin_open: true
+    tty: true
+    volumes:
+      - "./:/project/code"
+    depends_on:
+      - postgres
+      - broker
+    env_file:
+      - .env
+
   broker:
     image: rabbitmq:3.10.2-management-alpine
     container_name: rabbitmq
+    env_file:
+      - .env
     ports:
       - "5672:5672"
 
@@ -12,12 +63,22 @@ services:
     container_name: postgres
     ports:
       - "5432:5432"
-    environment:
-      POSTGRES_PASSWORD: example-password
-      POSTGRES_USER: exampleUser
-      POSTGRES_DB: exampleUser
+    env_file:
+      - .env
     volumes:
       - db_data:/var/lib/postgresql/data
 
+  nginx:
+    image: nginx
+    container_name: nginx
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    volumes:
+      - "./default.conf:/etc/nginx/conf.d/default.conf:ro"
+
 volumes:
   db_data: {}
+
+# celery -A lms flower --address=0.0.0.0 --port=5555

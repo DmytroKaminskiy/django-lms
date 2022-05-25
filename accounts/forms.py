@@ -7,7 +7,7 @@ from accounts.tasks import send_registration_email
 
 class AccountRegisterForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
-        fields = ("username", 'first_name', 'last_name', 'email')
+        fields = ("username", 'first_name', 'email')
 
     def save(self, *args, **kwargs):
         self._send_email()
