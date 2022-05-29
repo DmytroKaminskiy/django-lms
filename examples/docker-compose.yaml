@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+
+  backend:
+    image: zoom-events:local
+    build: .
+    container_name: backend
+    stdin_open: true
+    tty: true
+    volumes:
+      - "./:/project/code"
+    depends_on:
+      - postgres
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+
+  postgres:
+    image: postgres:14.3-alpine
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    ports:
+      - "5050:5050"
+    env_file:
+      - .env
+
+
+volumes:
+  db_data: {}

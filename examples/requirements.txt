@@ -1,0 +1,5 @@
+fastapi[all]
+SQLAlchemy
+databases[postgresql]
+psycopg2-binary
+alembic
