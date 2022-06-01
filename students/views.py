@@ -13,7 +13,7 @@ from students.models import Student
 class StudentListView(ListView):
     model = Student
     template_name = 'students/list_students.html'
-    paginate_by = 5
+    paginate_by = 50
 
     def get_filter(self, queryset=None):
         if queryset is None:

@@ -1,4 +1,7 @@
 # from rest_framework import generics
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie
 from rest_framework.renderers import JSONRenderer
 
 from django_filters import rest_framework as filters
@@ -34,6 +37,12 @@ class StudentViewSet(viewsets.ModelViewSet):
     throttle_classes = [AnonStudentThrottle]
     # renderer_classes = [JSONRenderer, XMLRenderer]
 
+    @method_decorator(cache_page(60 * 60 * 2))
+    @method_decorator(vary_on_cookie)
+    def list(self, request, format=None):
+        return super().list(request, format=format)
+
+
 '''
 First
 1. Создать viewset для модели Teacher
@@ -53,4 +62,7 @@ Second
    Запускать каждые 15 минут использую селерибит.
    
 https://github.com/DmytroKaminskiy/currency_6/blob/main/app/currency/tasks.py
+
+
+1. Emails
 '''

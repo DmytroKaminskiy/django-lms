@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'rest_framework_simplejwt',
+    'django_filters',
 
     'core_lms',
     'students',
@@ -114,6 +115,15 @@ else:
         }
     }
 
+
+DEFAULT_CACHE_HOST = os.environ['MEMCACHED_HOST']
+DEFAULT_CACHE_PORT = os.environ.get('MEMCACHED_PORT', '11211')
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
+        'LOCATION': f'{DEFAULT_CACHE_HOST}:{DEFAULT_CACHE_PORT}',
+    }
+}
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 

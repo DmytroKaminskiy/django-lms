@@ -13,3 +13,9 @@ REST_FRAMEWORK = {
         # 'user': '1000/day',
     }
 }
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    },
+}

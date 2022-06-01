@@ -3,8 +3,10 @@ from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.urls import reverse
+from django.views.decorators.cache import cache_page
 
 
+@cache_page(60 * 15)  # 60 * 15 == 15 min
 def index(request):
     return render(request, 'index.html')
 
